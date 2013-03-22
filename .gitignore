@@ -1,0 +1,9 @@
+*.py[cod]
+
+venv
+
+# IDE
+.project
+.pydevproject
+.settings
+*~
