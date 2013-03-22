@@ -7,3 +7,6 @@ venv
 .pydevproject
 .settings
 *~
+
+# Sensitive
+logic/dbCredentials.py
