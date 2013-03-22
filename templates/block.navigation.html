@@ -1,0 +1,11 @@
+<ul class="nav nav-list">
+	<li class="nav-header">Tables</li>
+	<!-- <li class="active"><a href="#">Link</a></li> -->
+	{% for table in temvar['tableNames'] %}
+	<li{% if table[0] == temvar['state']['table'] %} class="active"{% endif %}>
+		<a href="{{ url_for('tableView', table = table[0]) }}">{{ table[0] }}</a>
+	</li>
+	{% else %}
+	<li>No tables found</li>
+	{% endfor %}
+</ul>

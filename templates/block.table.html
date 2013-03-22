@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+{% block body %}
+<table>
+	<thead>
+		{% for column in temvar['table']['columns'] %}
+		<th>{{ column[0] }}</th>
+		{% endfor %}
+	</thead>
+	{% for row in temvar['table']['entries'] %}
+	<tr>
+		{% for entry in row %}
+		<td>{{ entry }}</td>
+		{% endfor %}
+	</tr>
+	{% endfor %}
+</table>
+<p></p>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xml:lang="en-US">
+	<head profile="http://www.w3.org/2005/10/profile">
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8"></meta>
+		<meta http-equiv="content-language" content="en-US"></meta>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"></meta>
+		<title>wildesql</title>
+		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='media/favicon.ico') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap-responsive.css') }}" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/office.css') }}" />
+	</head>
+	<body>
+		<!-- Header -->
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="brand" href="#">wildesql</a>
+					<div class="nav-collapse collapse">
+						<p class="navbar-text pull-right">
+							Logged in as <a href="#" class="navbar-link">Username</a>
+						</p>
+						<ul class="nav">
+							<li class="active"><a href="{{ url_for('begin') }}">Home</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /Header -->
+		<div class="container-fluid daddy">
+			<div class="row-fluid">
+				<!-- Navigation -->
+				<div class="span3">
+					<div class="well sidebar-nav navigation-options">{% include 'block.navigation.html' %}</div>
+				</div>
+				<!-- /Navigation -->
+				<!-- Body -->
+				<div class="span9">
+					<div class="row-fluid">{% block body %}{% endblock %}</div>
+				</div>
+				<!-- /Body -->
+			</div>
+			<hr>
+			<footer>
+				<p>&copy; Morgan Wilde</p>
+			</footer>
+		</div><!--/.fluid-container-->
+	</body>
+</html>
