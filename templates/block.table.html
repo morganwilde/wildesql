@@ -2,17 +2,21 @@
 {% block body %}
 <table>
 	<thead>
-		{% for column in temvar['table']['columns'] %}
-		<th>{{ column[0] }}</th>
-		{% endfor %}
+		<tr>
+			{% for column in temvar['table']['columns'] %}
+			<th>{{ column[0] }}</th>
+			{% endfor %}
+		</tr>
 	</thead>
-	{% for row in temvar['table']['entries'] %}
-	<tr>
-		{% for entry in row %}
-		<td>{{ entry }}</td>
+	<tbody>
+		{% for row in temvar['table']['entries'] %}
+		<tr>
+			{% for entry in row %}
+			<td>{{ entry }}</td>
+			{% endfor %}
+		</tr>
 		{% endfor %}
-	</tr>
-	{% endfor %}
+	</tbody>
 </table>
 <p></p>
 {% endblock %}

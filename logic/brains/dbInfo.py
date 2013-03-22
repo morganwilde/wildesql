@@ -12,7 +12,7 @@ def columnNames(table):
     """
     returns all table column names
     """
-    sql = "SELECT column_name FROM information_schema.columns WHERE table_name = '{0}'".format(table)
+    sql = "SELECT column_name FROM information_schema.columns WHERE table_name = '{0}' ORDER BY ordinal_position".format(table)
     names = session.query("column_name").from_statement(sql).all()
     return names
 
@@ -31,6 +31,6 @@ def tableData(table):
         columnsStr = columnsStr[:-2]
     
     # query
-    sql = "SELECT {0} FROM {1}".format(columnsStr, table)
+    sql = "SELECT {0} FROM {1} ORDER BY id ASC".format(columnsStr, table)
     data = session.query(*query).from_statement(sql).all()
     return data
