@@ -1,15 +1,16 @@
 import os, sys
 sys.dont_write_bytecode = True
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 ###
 # wildesql imports
 ###
-from logic.brains.dbInfo import tableNames, columnNames, tableData
+from logic.brains.dbInfo import tableNames, columnNames, tableData, tablePrimaryKey, columnLengths, dbName
 
 temvar = {'tableNames': tableNames(),
           'state': {},
-          'table': {}}
+          'table': {},
+          'action': {}}
 
 app = Flask(__name__)
 
@@ -22,11 +23,22 @@ def begin():
 @app.route('/table')
 @app.route('/table/')
 @app.route('/table/<table>')
-def tableView(table = None):
+@app.route('/table/<table>/do-<action>', methods = ['GET', 'POST'])
+def tableView(table = None, action = None):
     if table != None:
+        table = str(table)
+        temvar['state']['db'] = dbName()
         temvar['state']['table'] = table
         temvar['table']['columns'] = columnNames(table)
+        temvar['table']['columnsLength'] = columnLengths(table)
+        temvar['table']['primary'] = tablePrimaryKey(table)
         temvar['table']['entries'] = tableData(table)
+        
+        # actions
+        if (action != None):
+            temvar['action']['name'] = action
+            temvar['action']['get'] = request.args
+            temvar['action']['post'] = request.form
     else:
         # TODO implement error message for non-existing tables names (or empty ones)
         pass

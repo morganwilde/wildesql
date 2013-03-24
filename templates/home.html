@@ -8,9 +8,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes"></meta>
 		<title>wildesql</title>
 		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='media/favicon.ico') }}" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/bootstrap-responsive.css') }}" />
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style/office.css') }}" />
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='logic/table.js') }}"></script>
 	</head>
 	<body>
 		<!-- Header -->
@@ -25,7 +28,7 @@
 					<a class="brand" href="#">wildesql</a>
 					<div class="nav-collapse collapse">
 						<p class="navbar-text pull-right">
-							Logged in as <a href="#" class="navbar-link">Username</a>
+							Logged in to <span class="important">{{ temvar['state']['db'] }}</span>
 						</p>
 						<ul class="nav">
 							<li class="active"><a href="{{ url_for('begin') }}">Home</a></li>

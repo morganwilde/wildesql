@@ -1,22 +1,60 @@
 {% extends 'home.html' %}
 {% block body %}
 <table>
+	<colgroup>
+		{% for column in temvar['table']['columns'] %}
+		<col>
+		{% endfor %}
+	</colgroup>
 	<thead>
 		<tr>
 			{% for column in temvar['table']['columns'] %}
-			<th>{{ column[0] }}</th>
+				{% set thClass = ''%}
+				{% if column[2] == 'int4' and column[0] != temvar['table']['primary'] %}
+					{% set thClass = 'aright'%}
+				{% elif column[0] == temvar['table']['primary'] %}
+					{% set thClass = 'primaryCol'%}
+				{% else %}
+					{% set thClass = 'aleft'%}
+				{% endif %}
+			<th class="{{ thClass }}" style="width: {{ temvar['table']['columnsLength'][column[0]]['percentage'] }}%">
+				<span class="colName">{{ column[0] }}</span>
+				<span class="colControl">
+					<button class="arrows foundicon-left-arrow act-move-column-left"></button>
+					<button class="arrows foundicon-right-arrow act-move-column-right"></button>
+				</span>
+			</th>
 			{% endfor %}
 		</tr>
 	</thead>
 	<tbody>
 		{% for row in temvar['table']['entries'] %}
 		<tr>
-			{% for entry in row %}
-			<td>{{ entry }}</td>
+			{% for column in temvar['table']['columns'] %}
+				{% set tdClass = ''%}
+				{% if column[0] == temvar['table']['primary'] %}
+					{% set tdClass = 'primaryCol'%}
+				{% elif temvar['table']['entries'][row][column[0]] is number %}
+					{% set tdClass = 'aright'%}
+				{% endif %}
+			<td class="{{ tdClass }}">{{ temvar['table']['entries'][row][column[0]] }}</td>
 			{% endfor %}
 		</tr>
 		{% endfor %}
 	</tbody>
+	<tfoot>
+		<tr>
+			{% for column in temvar['table']['columns'] %}
+				{% set tdSummary = '' %}
+				{% set tdclass = '' %}
+				{% if column[0] == temvar['table']['primary'] %}
+					{% set tdSummary = temvar['table']['entries']|count %}
+					{% set tdclass = 'primaryCol' %}
+				{% endif %}
+			<td class="{{ tdclass }}">{{ tdSummary }}</td>
+			{% endfor %}
+		</tr>
+	</tfoot>
 </table>
-<p></p>
+<p style="display: none">{{ temvar['action'] }}</p>
 {% endblock %}
